@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package aircraft.engineers.information;
+import java.sql.*;
 
 /**
  *
@@ -14,8 +15,33 @@ public class AircraftEngineersInformation {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main( String args[] )
+  {
+    Connection c = null;
+    Statement stmt = null;
+    try {
+      Class.forName("org.sqlite.JDBC");
+      c = DriverManager.getConnection("jdbc:sqlite:test.db");
+      
+      
+      stmt = c.createStatement();
+      String sql = "CREATE TABLE Users " +
+                   "(ID INT PRIMARY KEY     NOT NULL," +
+                   " username           VARCHAR    NOT NULL, " + 
+                   " password            VARCHAR     NOT NULL, " + 
+                   " position        VARCHAR, " + 
+                   " SALARY         REAL)"; 
+      stmt.executeUpdate(sql);
+      stmt.close();
+      c.close();
+      
+      
+      
+    } catch ( Exception e ) {
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
     }
+    System.out.println("Opened database successfully");
+  }
     
 }
