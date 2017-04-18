@@ -22,21 +22,7 @@ public class AircraftEngineersInformation {
     try {
       Class.forName("org.sqlite.JDBC");
       c = DriverManager.getConnection("jdbc:sqlite:test.db");
-      
-      
-      stmt = c.createStatement();
-      String sql = "CREATE TABLE Users " +
-                   "(ID INT PRIMARY KEY     NOT NULL," +
-                   " username           VARCHAR    NOT NULL, " + 
-                   " password            VARCHAR     NOT NULL, " + 
-                   " position        VARCHAR, " + 
-                   " SALARY         REAL)"; 
-      stmt.executeUpdate(sql);
-      stmt.close();
-      c.close();
-      
-      
-      
+      System.out.println("Opened database successfully");
     } catch ( Exception e ) {
       System.err.println( e.getClass().getName() + ": " + e.getMessage() );
       System.exit(0);

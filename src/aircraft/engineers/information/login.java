@@ -5,6 +5,8 @@
  */
 package aircraft.engineers.information;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,10 +31,32 @@ public class login extends javax.swing.JFrame {
     
     public login() {
         initComponents();
+        Toolkit toolkit = getToolkit();
+        Dimension size = toolkit.getScreenSize();
+        setLocation(size.width/2 - getWidth()/2, size.height/2 - getHeight()/2);
+        
+     
         conn = db.java_db();
+        currentDate();
         
     }
-
+    public void currentDate(){
+    Calendar cal = new GregorianCalendar ();
+    int month = cal.get(Calendar.MONTH);
+    int year = cal.get(Calendar.YEAR);
+    int day = cal.get(Calendar.DAY_OF_MONTH);
+    
+    lbl_date.setText((month +1)+"/"+day+"/"+year);
+    
+    int second = cal.get(Calendar.SECOND);
+    int minute = cal.get(Calendar.MINUTE);
+    int hour = cal.get(Calendar.HOUR);
+    
+    lbl_time.setText(hour+":"+(minute)+":"+second);
+    
+    
+    
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +75,7 @@ public class login extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         txt_combo = new javax.swing.JComboBox();
         txt_username = new javax.swing.JTextField();
-        txt_password = new javax.swing.JTextField();
+        txt_password = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -101,9 +125,8 @@ public class login extends javax.swing.JFrame {
 
         txt_combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Senior AC Engineer", "Junior AC Engineer" }));
         jPanel2.add(txt_combo);
-        txt_combo.setBounds(290, 130, 190, 40);
+        txt_combo.setBounds(290, 130, 190, 30);
 
-        txt_username.setText("hgyfhgfgfdgf");
         txt_username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_usernameActionPerformed(evt);
@@ -111,14 +134,8 @@ public class login extends javax.swing.JFrame {
         });
         jPanel2.add(txt_username);
         txt_username.setBounds(280, 60, 210, 30);
-
-        txt_password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_passwordActionPerformed(evt);
-            }
-        });
         jPanel2.add(txt_password);
-        txt_password.setBounds(280, 100, 210, 28);
+        txt_password.setBounds(280, 100, 210, 30);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aircraft/engineers/information/Images/Screen Shot 2017-04-15 at 10.29.47 AM.png"))); // NOI18N
         jLabel6.setText("jLabel6");
@@ -212,10 +229,6 @@ public class login extends javax.swing.JFrame {
     private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_usernameActionPerformed
-
-    private void txt_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_passwordActionPerformed
    
     /**
      * @param args the command line arguments
@@ -266,7 +279,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JMenu lbl_date;
     private javax.swing.JMenu lbl_time;
     private javax.swing.JComboBox txt_combo;
-    private javax.swing.JTextField txt_password;
+    private javax.swing.JPasswordField txt_password;
     private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }
